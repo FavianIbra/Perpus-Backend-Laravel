@@ -9,7 +9,9 @@ class SiswaController extends Controller
 {
     public function getsiswa()
     {
-        $dt_siswa=Siswa::get();
+        $dt_siswa=Siswa::
+        join('kelas','siswa.id_kelas','=','kelas.id_kelas')
+        ->get();
         return response()->json($dt_siswa);
     }
 
