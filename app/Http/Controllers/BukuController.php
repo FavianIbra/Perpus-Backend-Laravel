@@ -13,6 +13,11 @@ class BukuController extends Controller
         return response()->json($dt_buku);
     }
 
+    public function getsatubuku($id){
+        $buku = Buku::where('id_buku','=',$id)->get();
+            return response()->json($buku);
+    }
+
     public function createbuku(Request $req)
     {
         $validator = Validator::make($req->all(),[

@@ -16,7 +16,9 @@ class SiswaController extends Controller
     }
 
     public function getsatusiswa($id){
-        $getdetail = Siswa::where('id_siswa','=',$id)->get();
+        $getdetail = Siswa::where('id_siswa','=',$id)
+        ->join('kelas','siswa.id_kelas','=','kelas.id_kelas')
+        ->get();
             return response()->json($getdetail);
     }
 

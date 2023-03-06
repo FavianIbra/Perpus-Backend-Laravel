@@ -45,6 +45,7 @@ Route::delete('/deletekelas/{id}',[KelasController::class,'deletekelas']);
 
 
 Route::get('/getbuku',[BukuController::class,'getbuku']);
+Route::get('/getbuku/{id}',[BukuController::class,'getsatubuku']);
 Route::post('/createbuku',[BukuController::class,'createbuku']);
 Route::put('/updatebuku/{id}',[BukuController::class,'updatebuku']);
 Route::delete('/deletebuku/{id}',[BukuController::class,'deletebuku']);
