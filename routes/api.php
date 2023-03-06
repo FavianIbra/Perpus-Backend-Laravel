@@ -32,6 +32,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 
 Route::get('/getsiswa',[SiswaController::class,'getsiswa']);
+Route::get('/getsiswa/{id}',[SiswaController::class,'getsatusiswa']);
 Route::post('/createsiswa',[SiswaController::class,'createsiswa']);
 Route::put('/updatesiswa/{id}',[SiswaController::class,'updatesiswa']);
 Route::delete('/deletesiswa/{id}',[SiswaController::class,'deletesiswa']);

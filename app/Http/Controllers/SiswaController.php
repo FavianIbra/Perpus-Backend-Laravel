@@ -15,6 +15,11 @@ class SiswaController extends Controller
         return response()->json($dt_siswa);
     }
 
+    public function getsatusiswa($id){
+        $getdetail = Siswa::where('id_siswa','=',$id)->get();
+            return response()->json($getdetail);
+    }
+
     public function createsiswa(Request $req)
     {
         $validator = Validator::make($req->all(),[
