@@ -4,16 +4,16 @@ use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use illuminate\Support\Facades\Hash;
+use illuminate\Support\Carbon;
 
 class PeminjamanController extends Controller
 {
-    public function getpeminjaman($id)
+    public function getpeminjaman()
     {
-        $dt_peminjaman=Peminjaman::select('nama_siswa', 'nama_kelas','judul_buku','tgl_pinjam', 'tgl_kembali','status')
-        ->join('siswa', "siswa.id_siswa", "=" , 'peminjaman.id_siswa')
+        $dt_peminjaman=Peminjaman::
+            join('siswa', "siswa.id_siswa", "=" , 'peminjaman.id_siswa')
         ->join('kelas', "kelas.id_kelas", "=" , 'peminjaman.id_kelas')
         ->join('buku', "buku.id_buku", "=" , 'peminjaman.id_buku')
-        ->where('id_peminjaman', '=', $id)
         ->get();
         return response()->json($dt_peminjaman);
     }
@@ -56,13 +56,17 @@ class PeminjamanController extends Controller
     }
 
     public function kembalipeminjaman($id){
-        $hapus=Peminjaman::where('id_peminjaman', "=", $id)
+
+        $tgl_kembali = Carbon::now();
+
+        $kembali=Peminjaman::where('id_peminjaman', "=", $id)
         ->update([
-            'status' => 'Kembali' 
+            'status' => 'Kembali',
+            'tgl_kembali' => $tgl_kembali
         ]);
-        if($hapus){
+        if($kembali){
             return Response()->json(['status'=>true,'message' => 'Sukses Mengembalikan buku ']);
-        } else {
+        } else {    
             return Response()->json(['status'=>false,'message' => 'Gagal Mengembalikan buku ']);
         }
         
