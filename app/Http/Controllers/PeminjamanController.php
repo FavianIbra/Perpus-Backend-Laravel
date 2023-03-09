@@ -14,6 +14,7 @@ class PeminjamanController extends Controller
             join('siswa', "siswa.id_siswa", "=" , 'peminjaman.id_siswa')
         ->join('kelas', "kelas.id_kelas", "=" , 'peminjaman.id_kelas')
         ->join('buku', "buku.id_buku", "=" , 'peminjaman.id_buku')
+        ->orderBy('id_peminjaman','desc')
         ->get();
         return response()->json($dt_peminjaman);
     }
@@ -24,18 +25,23 @@ class PeminjamanController extends Controller
             'id_siswa'=>'required',
             'id_kelas'=>'required',
             'id_buku'=>'required',
-            'tgl_kembali'=>'required',
+            // 'tgl_kembali'=>'required',
         ]);
         if($validator->fails()){
             return Response()->json($validator->errors()->toJson());
         }
+
+        $tenggat = carbon::now()->addDays(7);
+        $tgl_pinjam = carbon::now();
+
         $save = peminjaman::create([
             'id_siswa' =>$req->get('id_siswa'),
             'id_kelas' =>$req->get('id_kelas'),
             'id_buku' =>$req->get('id_buku'),
-            'tgl_pinjam' =>date('Y-m-d H:i:s'),
-            'tgl_kembali' =>$req->get('tgl_kembali'),
-            'status' => 'dipinjam',
+            'tgl_pinjam' => $tgl_pinjam,
+            // 'tgl_kembali' =>$req->get('tgl_kembali'),
+            'tenggat' => $tenggat,
+            'status' => 'Dipinjam',
             
         ]);
         if($save){
