@@ -52,6 +52,7 @@ Route::delete('/deletebuku/{id}',[BukuController::class,'deletebuku']);
 
 
 Route::get('/getpeminjaman/',[PeminjamanController::class,'getpeminjaman']);
+Route::get('/getpeminjaman/{id}',[PeminjamanController::class,'getsatupeminjaman']);
 Route::post('/createpeminjaman',[PeminjamanController::class,'createpeminjaman']);
 Route::put('/kembalipeminjaman/{id}',[PeminjamanController::class,'kembalipeminjaman']);
 Route::delete('/deletepeminjaman/{id}',[PeminjamanController::class,'deletepeminjaman']);

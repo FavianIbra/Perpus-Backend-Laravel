@@ -18,6 +18,11 @@ class PeminjamanController extends Controller
         ->get();
         return response()->json($dt_peminjaman);
     }
+    public function getsatupeminjaman($id)
+    {
+        $satu = Peminjaman::where('id_peminjaman',$id)->get();
+        return response()->json($satu);
+    }
 
     public function createpeminjaman(Request $req)
     {
