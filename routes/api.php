@@ -28,7 +28,8 @@ Route::post('/register', [UserController::class,'register']);
 Route::post('/login', [UserController::class, 'login']); 
 
 
-// Route::group(['middleware' => ['jwt.verify']], function () { 
+
+Route::group(['middleware' => ['jwt.verify']], function () { 
 
 
 Route::get('/getsiswa',[SiswaController::class,'getsiswa']);
@@ -57,7 +58,7 @@ Route::post('/createpeminjaman',[PeminjamanController::class,'createpeminjaman']
 Route::put('/kembalipeminjaman/{id}',[PeminjamanController::class,'kembalipeminjaman']);
 Route::delete('/deletepeminjaman/{id}',[PeminjamanController::class,'deletepeminjaman']);
 
-// }); 
+}); 
 
 
 
